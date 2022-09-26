@@ -2,14 +2,35 @@
 {% extends "layouts/base.html" %}
 
 <!- This variable sets name of browser tab  -->
-{% set project = "Stubby" %}
+{% set project = "About Us" %}
 
 <!- This is a replacement block for Body in base.html -->
 {% block body %}
     <!- Try building a new body here, bootstrap is a wise choice ->
     <div class="px-5 py-5 mx-auto">
-        <h1 class="text-primary"><strong>Stubby Body</strong></h1>
-        <p class="text-secondary">Put your name here</p>
+        <h1 class="text-primary">Our Aim</h1>
+        <p class="text-secondary">
+            We want to prioritize the customer before anything else; here's how this will be done:
+            <br> 1. Our website will run smoothly with minimal errors
+            <br> 2. Try to keep our website as engaging as possible
+            <br> 3. Listen to reviews and make changes as necessary
+            <br> 4. Make the results accurate
+        </p>        
+        <h1 class="text-primary">About the Project</h1>
+        <p class="text-secondary">
+            In this project, we are making a reverse dictionary. 
+            We were inspired by many students' studious and driven culture and wanted to create a site that could help them. 
+            A problem that we noticed among many students, especially those in advanced English courses, is that they often don't know or can't remember the word they want to use.
+            Through the use of this website, we want to help these students allowing them to do well where ever they choose to use this website.
+        <h1 class="text-primary">How is This Done</h1>
+        <p class="text-secondary">
+            In order to achieve this, we first need to get a basic understanding of how reverse dictionaries work and how to code them.
+            After searching on Google, we came across many fascinating sites, some even explaining the basics of a reverse dictionary. 
+            Essentially it is looking for an output similar to the combination of the inputs.
+            One of our ideas was to make the user input either the definition of the word or other words related to the word they need.
+            For example, if you're searching for the word "apple," you can input "fruit," "red," and "grows on trees" to get your result.
+            And currently, we are planning to code most of this with Python, use HTML to display everything, and use JavaScript to allow the user to interact with the results.
+        </p>
     </div>
 {% endblock %}
 
