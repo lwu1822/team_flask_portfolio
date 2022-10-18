@@ -1,0 +1,37 @@
+{% extends "layouts/base.html" %}
+
+{% block body %}
+    <!-- Start of body content specific to page -->
+    <style>
+        h1 span { 
+            background-image: linear-gradient(60deg, #E21143, #FFB03A); 
+            color: white;
+        }
+
+    </style>
+    <div class="px-5 py-5 mx-auto">
+
+                <br>
+        <div class="col-15">
+                <center>
+                    <div class="card">
+                        <div class="card-body">
+                        <h5 class="card-title">Dictionary API</h5>
+                        <p class="card-text">
+                            {{ word }}
+                            <br>
+                            {{ wordDefinition }}
+                        </p>
+                        </div>
+                    </div>
+                </center>
+
+                <br> 
+            
+                <br>
+        </div>
+
+        
+
+
+{% endblock %}
