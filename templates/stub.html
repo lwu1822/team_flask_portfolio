@@ -32,6 +32,56 @@
             And currently, we are planning to code most of this with Python, use HTML to display everything, and use JavaScript to allow the user to interact with the results.
         </p>
     </div>
+
+    <h1 style="color:#0d6efd!important">&nbsp&nbsp&nbsp Team Members</h1>
+    <div id="table"></div>
+    <script> 
+        function TeamMembers(name, role) {
+        this.name = name;
+        this.role = role;
+        }
+        <!-- space -->
+        var team = [
+            new TeamMembers("Shreyas Sarurkar &nbsp&nbsp&nbsp&nbsp", "Scrum Master"),
+            new TeamMembers("Ekam Kaire", "DevOps"),
+            new TeamMembers("Ishi Singh", "Frontend"),
+            new TeamMembers("Lily Wu", "Backend")
+        ];
+        <!-- space -->
+        function Combine(team) {
+            this.team = team;
+            this.combine = [];
+            this.team.forEach(people => {this.combine.push(people);});
+        }
+        <!-- space -->
+        printTeam = new Combine(team);
+        <!-- space -->
+        var outputHTML = "";
+        outputHTML += "<table>";
+        outputHTML += "<tr>";
+        outputHTML += "<td>" + "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp" + "</td>";
+        outputHTML += "<td>" + "Name &nbsp" + "</td>";
+        outputHTML += "<td>" + "Role &nbsp&nbsp&nbsp" + "</td>";
+        outputHTML += "</tr>";
+        <!-- space -->
+        var week = 0;
+        for (var row of printTeam.combine) {
+            outputHTML += "<tr>";
+            outputHTML += "<td>" + "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp" + "</td>";
+            outputHTML += "<td>" + row.name  + "</td>";
+            outputHTML += "<td>" + row.role + "</td>";
+            outputHTML += "</tr>";
+        }
+        outputHTML += "</table>";
+        <!-- space -->
+        document.getElementById("table").innerHTML = outputHTML;
+    </script>
+    
+
+    
+
+    
+
 {% endblock %}
 
 <!- This is turning off birds background from base.html -->
