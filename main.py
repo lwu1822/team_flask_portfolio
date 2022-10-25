@@ -6,7 +6,7 @@ from api import app_api # Blueprint import api definition
 from bp_projects.projects import app_projects # Blueprint directory import projects definition
 
 import requests
-# test
+
 app.register_blueprint(app_api) # register api routes
 app.register_blueprint(app_projects) # register api routes
 
