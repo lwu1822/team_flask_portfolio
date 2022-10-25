@@ -14,7 +14,7 @@ api = Api(app_api)
 class JokesAPI:
     # not implemented
     class _Create(Resource):
-        def post(self, joke):
+        def post(self, feedback):
             pass
             
     # getJokes()
@@ -52,13 +52,13 @@ class JokesAPI:
             return jsonify(getFeedback(id))
 
     # building RESTapi resources/interfaces, these routes are added to Web Server
-    api.add_resource(_Create, '/create/<string:joke>')
+    api.add_resource(_Create, '/create/<string:feedback>')
     api.add_resource(_Read, '/')
     api.add_resource(_ReadID, '/<int:id>')
     api.add_resource(_ReadRandom, '/random')
     api.add_resource(_ReadCount, '/count')
     api.add_resource(_UpdateYes, '/yes/<int:id>')
-    api.add_resource(_UpdateNo, '/No/<int:id>')
+    api.add_resource(_UpdateNo, '/no/<int:id>')
     
 if __name__ == "__main__": 
     # server = "http://127.0.0.1:5000" # run local
