@@ -42,20 +42,20 @@ def getRandomFeedback():
 def favoriteFeedback():
     best = 0
     bestID = -1
-    for joke in getFeedbacks():
-        if joke['yes'] > best:
-            best = joke['yes']
-            bestID = joke['id']
+    for feedback in getFeedbacks():
+        if feedback['yes'] > best:
+            best = feedback['yes']
+            bestID = feedback['id']
     return feedback_data[bestID]
     
 # Jeered joke
 def jeeredFeedback():
     worst = 0
     worstID = -1
-    for joke in getFeedbacks():
-        if joke['no'] > worst:
-            worst = joke['no']
-            worstID = joke['id']
+    for feedback in getFeedbacks():
+        if feedback['no'] > worst:
+            worst = feedback['no']
+            worstID = feedback['id']
     return feedback_data[worstID]
 
 # Add to haha for requested id

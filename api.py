@@ -40,13 +40,13 @@ class JokesAPI:
             return jsonify(countMsg)
 
     # put method: addJokeHaHa
-    class _UpdateLike(Resource):
+    class _UpdateYes(Resource):
         def put(self, id):
             addFeedbackHaHa(id)
             return jsonify(getFeedback(id))
 
     # put method: addJokeBooHoo
-    class _UpdateJeer(Resource):
+    class _UpdateNo(Resource):
         def put(self, id):
             addFeedbackBooHoo(id)
             return jsonify(getFeedback(id))
@@ -57,13 +57,13 @@ class JokesAPI:
     api.add_resource(_ReadID, '/<int:id>')
     api.add_resource(_ReadRandom, '/random')
     api.add_resource(_ReadCount, '/count')
-    api.add_resource(_UpdateLike, '/like/<int:id>')
-    api.add_resource(_UpdateJeer, '/jeer/<int:id>')
+    api.add_resource(_UpdateYes, '/yes/<int:id>')
+    api.add_resource(_UpdateNo, '/No/<int:id>')
     
 if __name__ == "__main__": 
     # server = "http://127.0.0.1:5000" # run local
     server = 'https://teamberries.tk' # run from web
-    url = server + "/api/jokes"
+    url = server + "/api/feedback"
     responses = []  # responses list
 
     # get count of jokes on server
@@ -77,10 +77,10 @@ if __name__ == "__main__":
         requests.get(url+"/"+num)  # read joke by id
         ) 
     responses.append(
-        requests.put(url+"/like/"+num) # add to like count
+        requests.put(url+"/yes/"+num) # add to like count
         ) 
     responses.append(
-        requests.put(url+"/jeer/"+num) # add to jeer count
+        requests.put(url+"/no/"+num) # add to jeer count
         ) 
 
     # obtain a random joke
