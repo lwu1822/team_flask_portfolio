@@ -9,7 +9,7 @@ feedback_list = [
     "If this project were to be available on the market, would you use it?"
     
 ]
-# test
+
 # Initialize jokes
 def initJokes():
     # setup jokes into a dictionary with id, joke, haha, boohoo
