@@ -20,36 +20,36 @@ class JokesAPI:
     # getJokes()
     class _Read(Resource):
         def get(self):
-            return jsonify(getJokes())
+            return jsonify(getFeedbacks())
 
     # getJoke(id)
     class _ReadID(Resource):
         def get(self, id):
-            return jsonify(getJoke(id))
+            return jsonify(getFeedback(id))
 
     # getRandomJoke()
     class _ReadRandom(Resource):
         def get(self):
-            return jsonify(getRandomJoke())
+            return jsonify(getRandomFeedback())
     
     # getRandomJoke()
     class _ReadCount(Resource):
         def get(self):
-            count = countJokes()
+            count = countFeedback()
             countMsg = {'count': count}
             return jsonify(countMsg)
 
     # put method: addJokeHaHa
     class _UpdateLike(Resource):
         def put(self, id):
-            addJokeHaHa(id)
-            return jsonify(getJoke(id))
+            addFeedbackHaHa(id)
+            return jsonify(getFeedback(id))
 
     # put method: addJokeBooHoo
     class _UpdateJeer(Resource):
         def put(self, id):
-            addJokeBooHoo(id)
-            return jsonify(getJoke(id))
+            addFeedbackBooHoo(id)
+            return jsonify(getFeedback(id))
 
     # building RESTapi resources/interfaces, these routes are added to Web Server
     api.add_resource(_Create, '/create/<string:joke>')

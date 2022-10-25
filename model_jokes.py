@@ -11,7 +11,7 @@ feedback_list = [
 ]
 
 # Initialize jokes
-def initJokes():
+def initFeedback():
     # setup jokes into a dictionary with id, joke, haha, boohoo
     item_id = 0
     for item in feedback_list:
@@ -19,78 +19,78 @@ def initJokes():
         item_id += 1
     # prime some haha responses
     for i in range(10):
-        id = getRandomJoke()['id']
-        addJokeHaHa(id)
+        id = getRandomFeedback()['id']
+        addFeedbackHaHa(id)
     # prime some haha responses
     for i in range(5):
-        id = getRandomJoke()['id']
-        addJokeBooHoo(id)
+        id = getRandomFeedback()['id']
+        addFeedbackBooHoo(id)
         
 # Return all jokes from jokes_data
-def getJokes():
+def getFeedbacks():
     return(feedback_data)
 
 # Joke getter
-def getJoke(id):
+def getFeedback(id):
     return(feedback_data[id])
 
 # Return random joke from jokes_data
-def getRandomJoke():
+def getRandomFeedback():
     return(random.choice(feedback_data))
 
 # Liked joke
-def favoriteJoke():
+def favoriteFeedback():
     best = 0
     bestID = -1
-    for joke in getJokes():
+    for joke in getFeedbacks():
         if joke['yes'] > best:
             best = joke['yes']
             bestID = joke['id']
     return feedback_data[bestID]
     
 # Jeered joke
-def jeeredJoke():
+def jeeredFeedback():
     worst = 0
     worstID = -1
-    for joke in getJokes():
+    for joke in getFeedbacks():
         if joke['no'] > worst:
             worst = joke['no']
             worstID = joke['id']
     return feedback_data[worstID]
 
 # Add to haha for requested id
-def addJokeHaHa(id):
+def addFeedbackHaHa(id):
     feedback_data[id]['yes'] = feedback_data[id]['yes'] + 1
     return feedback_data[id]['yes']
 
 # Add to boohoo for requested id
-def addJokeBooHoo(id):
+def addFeedbackBooHoo(id):
     feedback_data[id]['no'] = feedback_data[id]['no'] + 1
     return feedback_data[id]['no']
 
 # Pretty Print joke
-def printJoke(joke):
+def printFeedback(joke):
     print(joke['id'], joke['feedback'], "\n", "yes:", joke['yes'], "\n", "no:", joke['no'], "\n")
 
 # Number of jokes
-def countJokes():
+def countFeedback():
     return len(feedback_data)
 
 # Test Joke Model
 if __name__ == "__main__": 
-    initJokes()  # initialize jokes
+    initFeedback()  # initialize jokes
     
     # Most likes and most jeered
-    best = favoriteJoke()
+    best = favoriteFeedback()
     print("Most liked", best['yes'])
-    printJoke(best)
-    worst = jeeredJoke()
+    printFeedback(best)
+    worst = jeeredFeedback()
     print("Most jeered", worst['no'])
-    printJoke(worst)
+    printFeedback(worst)
     
     # Random joke
     print("Random joke")
-    printJoke(getRandomJoke())
+    printFeedback(getRandomFeedback())
     
     # Count of Jokes
-    print("Jokes Count: " + str(countJokes()))
+    print("Jokes Count: " + str(countFeedback()))
