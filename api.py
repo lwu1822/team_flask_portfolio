@@ -6,7 +6,7 @@ import random
 from model_jokes import *
 
 app_api = Blueprint('api', __name__,
-                   url_prefix='/api/jokes')
+                   url_prefix='/api/feedback')
 
 # API generator https://flask-restful.readthedocs.io/en/latest/api.html#id1
 api = Api(app_api)
@@ -14,56 +14,56 @@ api = Api(app_api)
 class JokesAPI:
     # not implemented
     class _Create(Resource):
-        def post(self, joke):
+        def post(self, feedback):
             pass
             
     # getJokes()
     class _Read(Resource):
         def get(self):
-            return jsonify(getJokes())
+            return jsonify(getFeedbacks())
 
     # getJoke(id)
     class _ReadID(Resource):
         def get(self, id):
-            return jsonify(getJoke(id))
+            return jsonify(getFeedback(id))
 
     # getRandomJoke()
     class _ReadRandom(Resource):
         def get(self):
-            return jsonify(getRandomJoke())
+            return jsonify(getRandomFeedback())
     
     # getRandomJoke()
     class _ReadCount(Resource):
         def get(self):
-            count = countJokes()
+            count = countFeedback()
             countMsg = {'count': count}
             return jsonify(countMsg)
 
     # put method: addJokeHaHa
-    class _UpdateLike(Resource):
+    class _UpdateYes(Resource):
         def put(self, id):
-            addJokeHaHa(id)
-            return jsonify(getJoke(id))
+            addFeedbackHaHa(id)
+            return jsonify(getFeedback(id))
 
     # put method: addJokeBooHoo
-    class _UpdateJeer(Resource):
+    class _UpdateNo(Resource):
         def put(self, id):
-            addJokeBooHoo(id)
-            return jsonify(getJoke(id))
+            addFeedbackBooHoo(id)
+            return jsonify(getFeedback(id))
 
     # building RESTapi resources/interfaces, these routes are added to Web Server
-    api.add_resource(_Create, '/create/<string:joke>')
+    api.add_resource(_Create, '/create/<string:feedback>')
     api.add_resource(_Read, '/')
     api.add_resource(_ReadID, '/<int:id>')
     api.add_resource(_ReadRandom, '/random')
     api.add_resource(_ReadCount, '/count')
-    api.add_resource(_UpdateLike, '/like/<int:id>')
-    api.add_resource(_UpdateJeer, '/jeer/<int:id>')
+    api.add_resource(_UpdateYes, '/yes/<int:id>')
+    api.add_resource(_UpdateNo, '/no/<int:id>')
     
 if __name__ == "__main__": 
     # server = "http://127.0.0.1:5000" # run local
     server = 'https://teamberries.tk' # run from web
-    url = server + "/api/jokes"
+    url = server + "/api/feedback"
     responses = []  # responses list
 
     # get count of jokes on server
@@ -77,10 +77,10 @@ if __name__ == "__main__":
         requests.get(url+"/"+num)  # read joke by id
         ) 
     responses.append(
-        requests.put(url+"/like/"+num) # add to like count
+        requests.put(url+"/yes/"+num) # add to like count
         ) 
     responses.append(
-        requests.put(url+"/jeer/"+num) # add to jeer count
+        requests.put(url+"/no/"+num) # add to jeer count
         ) 
 
     # obtain a random joke
