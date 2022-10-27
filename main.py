@@ -23,6 +23,10 @@ def index():
 def stub():
     return render_template("stub.html")
 
+@app.route('/dictionaryInput/')  
+def dictionaryInput():
+    return render_template("dictionaryInput.html")
+
 @app.route('/apitesting/', methods=['GET'])
 def apitest(): 
     import requests
