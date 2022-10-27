@@ -1,5 +1,5 @@
 # import "packages" from flask
-from flask import render_template  # import render_template from "public" flask libraries
+from flask import render_template, request  # import render_template from "public" flask libraries
 # import "packages" from "this" project
 from __init__ import app  # Definitions initialization
 from api import app_api # Blueprint import api definition
@@ -27,13 +27,15 @@ def stub():
 def dictionaryInput():
     return render_template("dictionaryInput.html")
 
-@app.route('/apitesting/', methods=['GET'])
+@app.route('/apitesting/', methods=['GET', 'POST'])
 def apitest(): 
     import requests
+    
+    inputWord = request.form.get("inputWord")
 
     url = "https://dictionary-by-api-ninjas.p.rapidapi.com/v1/dictionary"
 
-    querystring = {"word":"bright"}
+    querystring = {"word":inputWord}
 
     headers = {
         "X-RapidAPI-Key": "cc6d770f58msh120c53d95d27c68p1d2955jsn1898ff4fa031",
@@ -50,6 +52,8 @@ def apitest():
     print()
     print("Definition: ")
     print(wordDefinition)
+    
+    
 
     return render_template("api.html", word=word, wordDefinition=wordDefinition)
 
