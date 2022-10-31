@@ -4,9 +4,10 @@ services:
                 image: flask_port_v1
                 build: .
                 ports:
-                        - "8056:8056"
+                        - "8056:8080"
                 volumes:
                         - persistent_volume:/app/volumes
+                restart: unless-stopped
 volumes:
   persistent_volume:
     driver: local

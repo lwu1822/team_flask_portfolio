@@ -75,4 +75,4 @@ def apitest():
 
 # this runs the application on the development server
 if __name__ == "__main__":
-    app.run(debug=True, port=8056)
+    app.run(debug=True)
