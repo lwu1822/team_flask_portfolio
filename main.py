@@ -1,9 +1,11 @@
 # import "packages" from flask
+from random import Random
 from flask import render_template, request  # import render_template from "public" flask libraries
 # import "packages" from "this" project
 from __init__ import app  # Definitions initialization
 from api import app_api # Blueprint import api definition
 from bp_projects.projects import app_projects # Blueprint directory import projects definition
+from random_word import RandomWords
 import json
 
 import requests
@@ -18,7 +20,10 @@ def page_not_found(e):
 
 @app.route('/')  # connects default URL to index() function
 def index():
-    return render_template("index.html")
+    
+    wordOfTheDay = RandomWords().get_random_word()
+    print(wordOfTheDay)
+    return render_template("index.html", wordOfTheDay=wordOfTheDay)
 
 @app.route('/stub/')  # connects /stub/ URL to stub() function
 def stub():
@@ -54,10 +59,6 @@ def apitest():
     print("Definition: ")
     print(wordDefinition)
     
-   
-    
-   
-    
     newDef = json.dumps(wordDefinition)
     
     for ele in newDef:
@@ -67,6 +68,8 @@ def apitest():
 
     newDef = newDef.split('\n')
 
+   
+    
     return render_template("api.html", word=word, wordDefinition=wordDefinition, newDef=newDef)
 
 
