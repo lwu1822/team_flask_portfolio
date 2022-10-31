@@ -4,6 +4,7 @@ from flask import render_template, request  # import render_template from "publi
 from __init__ import app  # Definitions initialization
 from api import app_api # Blueprint import api definition
 from bp_projects.projects import app_projects # Blueprint directory import projects definition
+import json
 
 import requests
 
@@ -53,9 +54,20 @@ def apitest():
     print("Definition: ")
     print(wordDefinition)
     
+   
     
+   
+    
+    newDef = json.dumps(wordDefinition)
+    
+    for ele in newDef:
+        if ele.isdigit():
+            newDef = newDef.replace(ele, '\n')
+    print(newDef)
 
-    return render_template("api.html", word=word, wordDefinition=wordDefinition)
+    newDef = newDef.split('\n')
+
+    return render_template("api.html", word=word, wordDefinition=wordDefinition, newDef=newDef)
 
 
 # this runs the application on the development server

@@ -20,7 +20,12 @@
                         <p class="card-text">
                             {{ word }}
                             <br>
-                            {{ wordDefinition }}
+                            {% for para in newDef %}
+                                <p>{{para}}</p>
+                            {% endfor %}
+                            <br>
+                            <br>
+                            {{ newDef }}
                         </p>
                         </div>
                     </div>
