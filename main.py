@@ -8,6 +8,7 @@ from bp_projects.projects import app_projects # Blueprint directory import proje
 #from random_word import RandomWords
 import json
 import random
+import time
 
 import requests
 
@@ -61,7 +62,12 @@ def index():
     
     """
     wordOfTheDay = RandomWords().get_random_word()
-    print(wordOfTheDay)
+    
+    while True:
+        localtime = time.localtime()
+        result = time.strftime("word", localtime)
+        print(wordOfTheDay)
+        time.sleep(60)
     return render_template("index.html", wordOfTheDay=wordOfTheDay)
     """
     return render_template("index.html", wordOfTheDay=wordOfTheDay, newDef=newDef)
