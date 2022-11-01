@@ -5,7 +5,7 @@ from flask import render_template, request  # import render_template from "publi
 from __init__ import app  # Definitions initialization
 from api import app_api # Blueprint import api definition
 from bp_projects.projects import app_projects # Blueprint directory import projects definition
-from random_word import RandomWords
+#from random_word import RandomWords
 import json
 import random
 
