@@ -26,12 +26,45 @@ def index():
     wordOfTheDay = random.choice(ranWord)
     print(wordOfTheDay)
     
+    
+    import requests
+    
+    url = "https://dictionary-by-api-ninjas.p.rapidapi.com/v1/dictionary"
+
+    querystring = {"word":wordOfTheDay}
+
+    headers = {
+        "X-RapidAPI-Key": "cc6d770f58msh120c53d95d27c68p1d2955jsn1898ff4fa031",
+        "X-RapidAPI-Host": "dictionary-by-api-ninjas.p.rapidapi.com"
+    }
+
+    response = requests.request("GET", url, headers=headers, params=querystring)
+
+    wordDefinition = response.json().get('definition')
+    word = response.json().get('word')
+
+    print("Word: ")
+    print(word)
+    print()
+    print("Definition: ")
+    print(wordDefinition)
+    
+    newDef = json.dumps(wordDefinition)
+    
+    for ele in newDef:
+        if ele.isdigit():
+            newDef = newDef.replace(ele, '\n')
+    print(newDef)
+
+    newDef = newDef.split('\n')
+    
+    
     """
     wordOfTheDay = RandomWords().get_random_word()
     print(wordOfTheDay)
     return render_template("index.html", wordOfTheDay=wordOfTheDay)
     """
-    return render_template("index.html", wordOfTheDay=wordOfTheDay)
+    return render_template("index.html", wordOfTheDay=wordOfTheDay, newDef=newDef)
 
 
 @app.route('/stub/')  # connects /stub/ URL to stub() function
