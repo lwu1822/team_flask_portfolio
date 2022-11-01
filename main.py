@@ -7,7 +7,7 @@ from api import app_api # Blueprint import api definition
 from bp_projects.projects import app_projects # Blueprint directory import projects definition
 from random_word import RandomWords
 import json
-# test
+
 import requests
 
 app.register_blueprint(app_api) # register api routes
