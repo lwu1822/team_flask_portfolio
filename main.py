@@ -23,6 +23,7 @@ def page_not_found(e):
 @app.route('/')  # connects default URL to index() function
 def index():
     ranWord = open('words.txt').read().splitlines()
+    """
     if time.strftime("%H:%M:%S") == "00:00:00":
         wordOfTheDay = random.choice(ranWord)
         print(wordOfTheDay)
@@ -31,14 +32,26 @@ def index():
             pass
         with open('actualWordOfTheDay.txt', 'a') as f:
             f.write(wordOfTheDay)
-            
+    """
+           
     
+            
+    wordOfTheDay = random.choice(ranWord)
+    print(wordOfTheDay)
+    
+    
+    with open('actualWordOfTheDay.txt', 'w') as f:
+        pass
+    with open('actualWordOfTheDay.txt', 'a') as f:
+        f.write(wordOfTheDay)
+        
+
     wordOfTheDayFile = open('actualWordOfTheDay.txt')
     wordOfTheDayPInFile = wordOfTheDayFile.readlines()
     wordOfTheDayPrinted = wordOfTheDayPInFile[0]
     print(wordOfTheDayPrinted)
             
-     
+    
     url = "https://dictionary-by-api-ninjas.p.rapidapi.com/v1/dictionary"
 
     querystring = {"word":wordOfTheDayPrinted}
@@ -65,13 +78,12 @@ def index():
         if ele.isdigit():
             newDef = newDef.replace(ele, '\n')
     print(newDef)
+    
 
     newDef = newDef.split('\n')
+
     
-    
-    
-    
-    
+        
     """
     wordOfTheDay = RandomWords().get_random_word()
     print(wordOfTheDay)
@@ -79,6 +91,8 @@ def index():
     """
     
     return render_template("index.html", wordOfTheDayPrinted=wordOfTheDayPrinted, newDef=newDef)
+    
+    
         
     
     
