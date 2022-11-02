@@ -22,17 +22,26 @@ def page_not_found(e):
 
 @app.route('/')  # connects default URL to index() function
 def index():
-    
     ranWord = open('words.txt').read().splitlines()
-    wordOfTheDay = random.choice(ranWord)
-    print(wordOfTheDay)
+    if time.strftime("%H:%M:%S") == "00:00:00":
+        wordOfTheDay = random.choice(ranWord)
+        print(wordOfTheDay)
+        
+        with open('actualWordOfTheDay.txt', 'w') as f:
+            pass
+        with open('actualWordOfTheDay.txt', 'a') as f:
+            f.write(wordOfTheDay)
+            
     
-    
-    import requests
-    
+    wordOfTheDayFile = open('actualWordOfTheDay.txt')
+    wordOfTheDayPInFile = wordOfTheDayFile.readlines()
+    wordOfTheDayPrinted = wordOfTheDayPInFile[0]
+    print(wordOfTheDayPrinted)
+            
+     
     url = "https://dictionary-by-api-ninjas.p.rapidapi.com/v1/dictionary"
 
-    querystring = {"word":wordOfTheDay}
+    querystring = {"word":wordOfTheDayPrinted}
 
     headers = {
         "X-RapidAPI-Key": "cc6d770f58msh120c53d95d27c68p1d2955jsn1898ff4fa031",
@@ -60,17 +69,19 @@ def index():
     newDef = newDef.split('\n')
     
     
+    
+    
+    
     """
     wordOfTheDay = RandomWords().get_random_word()
-    
-    while True:
-        localtime = time.localtime()
-        result = time.strftime("word", localtime)
-        print(wordOfTheDay)
-        time.sleep(60)
+    print(wordOfTheDay)
     return render_template("index.html", wordOfTheDay=wordOfTheDay)
     """
-    return render_template("index.html", wordOfTheDay=wordOfTheDay, newDef=newDef)
+    
+    return render_template("index.html", wordOfTheDayPrinted=wordOfTheDayPrinted, newDef=newDef)
+        
+    
+    
 
 
 @app.route('/stub/')  # connects /stub/ URL to stub() function
