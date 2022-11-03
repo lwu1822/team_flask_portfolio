@@ -19,7 +19,7 @@ import requests
 app.register_blueprint(app_api) # register api routes
 app.register_blueprint(app_projects) # register api routes
 
-
+# test
 
 @app.errorhandler(404)  # catch for URL not found
 def page_not_found(e):
