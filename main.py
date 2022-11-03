@@ -1,6 +1,6 @@
 # import "packages" from flask
 from random import Random
-from flask import render_template, request  # import render_template from "public" flask libraries
+from flask import Flask, render_template, request, Response, redirect, url_for  # import render_template from "public" flask libraries
 # import "packages" from "this" project
 from __init__ import app  # Definitions initialization
 from api import app_api # Blueprint import api definition
@@ -9,11 +9,16 @@ from bp_projects.projects import app_projects # Blueprint directory import proje
 import json
 import random
 import time
+import itertools
+from datetime import datetime
+
 
 import requests
 
 app.register_blueprint(app_api) # register api routes
 app.register_blueprint(app_projects) # register api routes
+
+
 
 @app.errorhandler(404)  # catch for URL not found
 def page_not_found(e):
@@ -105,6 +110,18 @@ def stub():
 @app.route('/dictionaryInput/')  
 def dictionaryInput():
     return render_template("dictionaryInput.html")
+
+@app.route('/wotd/')  
+def wotd():
+    if request.headers.get('accept') == 'text/event-stream':
+        def events():
+            
+             for i, c in enumerate(itertools.cycle('\|/-')):
+                yield "data: %s %d\n\n" % (c, i)
+                time.sleep(.1)  # an artificial delay
+                    
+        return Response(events(), content_type='text/event-stream')
+    return redirect(url_for('static', filename='index.html'))
 
 @app.route('/apitesting/', methods=['GET', 'POST'])
 def apitest(): 
