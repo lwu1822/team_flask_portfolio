@@ -113,33 +113,14 @@ def dictionaryInput():
 
 @app.route('/wotd/')  
 def wotd():
+    wordOfTheDayPrinted="hi"
     if request.headers.get('accept') == 'text/event-stream':
-        def events():
+        def events():            
                 
             for i, c in enumerate(itertools.cycle('abc')):
-
-                now = datetime.now()
-                
-                print(now.second)
-                
-                """
-                with open('test.txt', 'w') as f:
-                    pass
-                
-                
-                with open('test.txt', 'a') as f:
-                    f.write("foo")
-                    
-                yield "data: %s %d\n\n" % (c, i)
-                    
-                time.sleep(3)  # an artificial delay
-                """
-                
                 ranWord = open('words.txt').read().splitlines()
                 
-                
-                
-                if now.second % 2 == 0:
+                if time.strftime("%H:%M:%S") == "00:00:00":
                     wordOfTheDay = random.choice(ranWord)
                     print(wordOfTheDay)
                     
@@ -147,20 +128,21 @@ def wotd():
                         pass
                     with open('actualWordOfTheDay.txt', 'a') as f:
                         f.write(wordOfTheDay)
+
+             
+    
                 
-                    wordOfTheDayFile = open('actualWordOfTheDay.txt')
-                    wordOfTheDayPInFile = wordOfTheDayFile.readlines()
-                    wordOfTheDayPrinted = wordOfTheDayPInFile[0]
-                    print(wordOfTheDayPrinted)
-                    
-                    yield "data: %s %d\n\n" % (wordOfTheDayPrinted, i)
+                #yield "data: %s %d\n\n" % (wordOfTheDayPrinted)
               
-                time.sleep(3600)
-                
                 
                     
         return Response(events(), content_type='text/event-stream')
-    return redirect(url_for('static', filename='index.html'))
+    wordOfTheDayFile = open('actualWordOfTheDay.txt')
+    wordOfTheDayPInFile = wordOfTheDayFile.readlines()
+    wordOfTheDayPrinted = wordOfTheDayPInFile[0]
+    #return redirect(url_for('static', filename='index.html'))
+    return render_template("test.html", wordOfTheDayPrinted=wordOfTheDayPrinted)
+    
 
 @app.route('/apitesting/', methods=['GET', 'POST'])
 def apitest(): 
