@@ -60,16 +60,12 @@ def jeeredFeedback():
 
 # Add to haha for requested id
 def addFeedbackHaHa(id):
-    feedback_data[id]['yes'] = 0
-    
-   # feedback_data[id]['yes'] = feedback_data[id]['yes'] + 1
+    feedback_data[id]['yes'] = feedback_data[id]['yes'] + 1
     return feedback_data[id]['yes']
 
 # Add to boohoo for requested id
 def addFeedbackBooHoo(id):
-    feedback_data[id]['no'] = 0
-    
-   # feedback_data[id]['no'] = feedback_data[id]['no'] + 1
+    feedback_data[id]['no'] = feedback_data[id]['no'] + 1
     return feedback_data[id]['no']
 
 # Pretty Print joke
