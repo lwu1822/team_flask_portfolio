@@ -17,6 +17,7 @@ def initFeedback():
     for item in feedback_list:
         feedback_data.append({"id": item_id, "feedback": item, "yes": 0, "no": 0})
         item_id += 1
+    """
     # prime some haha responses
     for i in range(10):
         id = getRandomFeedback()['id']
@@ -25,6 +26,7 @@ def initFeedback():
     for i in range(5):
         id = getRandomFeedback()['id']
         addFeedbackBooHoo(id)
+    """
         
 # Return all jokes from jokes_data
 def getFeedbacks():
@@ -60,12 +62,16 @@ def jeeredFeedback():
 
 # Add to haha for requested id
 def addFeedbackHaHa(id):
-    feedback_data[id]['yes'] = feedback_data[id]['yes'] + 1
+    feedback_data[id]['yes'] = 0
+    
+    #feedback_data[id]['yes'] = feedback_data[id]['yes'] + 1
     return feedback_data[id]['yes']
 
 # Add to boohoo for requested id
 def addFeedbackBooHoo(id):
-    feedback_data[id]['no'] = feedback_data[id]['no'] + 1
+    feedback_data[id]['no'] = 0
+    
+    #feedback_data[id]['no'] = feedback_data[id]['no'] + 1
     return feedback_data[id]['no']
 
 # Pretty Print joke
