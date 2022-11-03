@@ -115,10 +115,49 @@ def dictionaryInput():
 def wotd():
     if request.headers.get('accept') == 'text/event-stream':
         def events():
-            
-             for i, c in enumerate(itertools.cycle('\|/-')):
+                
+            for i, c in enumerate(itertools.cycle('abc')):
+
+                now = datetime.now()
+                
+                print(now.second)
+                
+                """
+                with open('test.txt', 'w') as f:
+                    pass
+                
+                
+                with open('test.txt', 'a') as f:
+                    f.write("foo")
+                    
                 yield "data: %s %d\n\n" % (c, i)
-                time.sleep(.1)  # an artificial delay
+                    
+                time.sleep(3)  # an artificial delay
+                """
+                
+                ranWord = open('words.txt').read().splitlines()
+                
+                
+                
+                if now.second % 2 == 0:
+                    wordOfTheDay = random.choice(ranWord)
+                    print(wordOfTheDay)
+                    
+                    with open('actualWordOfTheDay.txt', 'w') as f:
+                        pass
+                    with open('actualWordOfTheDay.txt', 'a') as f:
+                        f.write(wordOfTheDay)
+                
+                    wordOfTheDayFile = open('actualWordOfTheDay.txt')
+                    wordOfTheDayPInFile = wordOfTheDayFile.readlines()
+                    wordOfTheDayPrinted = wordOfTheDayPInFile[0]
+                    print(wordOfTheDayPrinted)
+                    
+                    yield "data: %s %d\n\n" % (wordOfTheDayPrinted, i)
+              
+                time.sleep(3600)
+                
+                
                     
         return Response(events(), content_type='text/event-stream')
     return redirect(url_for('static', filename='index.html'))
