@@ -53,8 +53,38 @@ def index():
     wordOfTheDayFile = open('actualWordOfTheDay.txt')
     wordOfTheDayPInFile = wordOfTheDayFile.readlines()
     wordOfTheDayPrinted = wordOfTheDayPInFile[0]
-    #return redirect(url_for('static', filename='index.html'))
-    return render_template("index.html", wordOfTheDayPrinted=wordOfTheDayPrinted)
+    
+    url = "https://dictionary-by-api-ninjas.p.rapidapi.com/v1/dictionary"
+
+    querystring = {"word":wordOfTheDayPrinted}
+
+    headers = {
+        "X-RapidAPI-Key": "cc6d770f58msh120c53d95d27c68p1d2955jsn1898ff4fa031",
+        "X-RapidAPI-Host": "dictionary-by-api-ninjas.p.rapidapi.com"
+    }
+
+    response = requests.request("GET", url, headers=headers, params=querystring)
+
+    wordDefinition = response.json().get('definition')
+    word = response.json().get('word')
+
+    print("Word: ")
+    print(word)
+    print()
+    print("Definition: ")
+    print(wordDefinition)
+    
+    newDef = json.dumps(wordDefinition)
+    
+    for ele in newDef:
+        if ele.isdigit():
+            newDef = newDef.replace(ele, '\n')
+    print(newDef)
+    
+
+    newDef = newDef.split('\n')
+    
+    return render_template("index.html", wordOfTheDayPrinted=wordOfTheDayPrinted, newDef=newDef)
     
     
         
