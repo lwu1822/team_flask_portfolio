@@ -7,4 +7,3 @@ flask_sqlalchemy
 flask_migrate
 flask_restful
 random_word
-time
