@@ -27,93 +27,6 @@ def page_not_found(e):
 
 @app.route('/')  # connects default URL to index() function
 def index():
-    ranWord = open('words.txt').read().splitlines()
-    """
-    if time.strftime("%H:%M:%S") == "00:00:00":
-        wordOfTheDay = random.choice(ranWord)
-        print(wordOfTheDay)
-        
-        with open('actualWordOfTheDay.txt', 'w') as f:
-            pass
-        with open('actualWordOfTheDay.txt', 'a') as f:
-            f.write(wordOfTheDay)
-    """
-           
-    
-            
-    wordOfTheDay = random.choice(ranWord)
-    print(wordOfTheDay)
-    
-    
-    with open('actualWordOfTheDay.txt', 'w') as f:
-        pass
-    with open('actualWordOfTheDay.txt', 'a') as f:
-        f.write(wordOfTheDay)
-        
-
-    wordOfTheDayFile = open('actualWordOfTheDay.txt')
-    wordOfTheDayPInFile = wordOfTheDayFile.readlines()
-    wordOfTheDayPrinted = wordOfTheDayPInFile[0]
-    print(wordOfTheDayPrinted)
-            
-    
-    url = "https://dictionary-by-api-ninjas.p.rapidapi.com/v1/dictionary"
-
-    querystring = {"word":wordOfTheDayPrinted}
-
-    headers = {
-        "X-RapidAPI-Key": "cc6d770f58msh120c53d95d27c68p1d2955jsn1898ff4fa031",
-        "X-RapidAPI-Host": "dictionary-by-api-ninjas.p.rapidapi.com"
-    }
-
-    response = requests.request("GET", url, headers=headers, params=querystring)
-
-    wordDefinition = response.json().get('definition')
-    word = response.json().get('word')
-
-    print("Word: ")
-    print(word)
-    print()
-    print("Definition: ")
-    print(wordDefinition)
-    
-    newDef = json.dumps(wordDefinition)
-    
-    for ele in newDef:
-        if ele.isdigit():
-            newDef = newDef.replace(ele, '\n')
-    print(newDef)
-    
-
-    newDef = newDef.split('\n')
-
-    
-        
-    """
-    wordOfTheDay = RandomWords().get_random_word()
-    print(wordOfTheDay)
-    return render_template("index.html", wordOfTheDay=wordOfTheDay)
-    """
-    
-    return render_template("index.html", wordOfTheDayPrinted=wordOfTheDayPrinted, newDef=newDef)
-    
-    
-        
-    
-    
-
-
-@app.route('/stub/')  # connects /stub/ URL to stub() function
-def stub():
-    return render_template("stub.html")
-
-@app.route('/dictionaryInput/')  
-def dictionaryInput():
-    return render_template("dictionaryInput.html")
-
-@app.route('/wotd/')  
-def wotd():
-    wordOfTheDayPrinted="hi"
     if request.headers.get('accept') == 'text/event-stream':
         def events():            
                 
@@ -141,8 +54,23 @@ def wotd():
     wordOfTheDayPInFile = wordOfTheDayFile.readlines()
     wordOfTheDayPrinted = wordOfTheDayPInFile[0]
     #return redirect(url_for('static', filename='index.html'))
-    return render_template("test.html", wordOfTheDayPrinted=wordOfTheDayPrinted)
+    return render_template("index.html", wordOfTheDayPrinted=wordOfTheDayPrinted)
     
+    
+        
+    
+    
+
+
+@app.route('/stub/')  # connects /stub/ URL to stub() function
+def stub():
+    return render_template("stub.html")
+
+@app.route('/dictionaryInput/')  
+def dictionaryInput():
+    return render_template("dictionaryInput.html")
+
+
 
 @app.route('/apitesting/', methods=['GET', 'POST'])
 def apitest(): 
