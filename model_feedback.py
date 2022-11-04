@@ -17,7 +17,7 @@ def initFeedback():
     for item in feedback_list:
         feedback_data.append({"id": item_id, "feedback": item, "yes": 0, "no": 0})
         item_id += 1
-    """
+    """ COMMENTED OUT BECAUSE IT MESSES WITH YES/NO RECORDS
     # prime some haha responses
     for i in range(10):
         id = getRandomFeedback()['id']
