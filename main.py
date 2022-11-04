@@ -130,7 +130,7 @@ def apitest():
     print(wordDefinition)
     
     newDef = json.dumps(wordDefinition)
-    
+    # test
     for ele in newDef:
         """
         if ele.isdigit():
