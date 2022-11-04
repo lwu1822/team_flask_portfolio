@@ -143,7 +143,15 @@ def apitest():
         if re.match("0", ele):
             newDef = newDef.replace(ele, '')
     
+    newDef = newDef.replace("(Zouf", " ")
+    newDef = newDef.replace("imp", " ")
+    newDef = newDef.replace("nn", " ")
+    newDef = newDef.replace("&", " ")
+    newDef = newDef.replace("l.)", " ")
+    newDef = newDef.replace("\"", " ")
     
+    
+
 
     newDef = newDef.split('\n')
 
