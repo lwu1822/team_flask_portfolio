@@ -2,7 +2,7 @@ from flask import Flask
 from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
-from model_jokes import initFeedback
+from model_feedback import initFeedback
 
 """
 These object can be used throughout project.
