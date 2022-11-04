@@ -19,7 +19,6 @@ import requests
 app.register_blueprint(app_api) # register api routes
 app.register_blueprint(app_projects) # register api routes
 
-# test
 
 @app.errorhandler(404)  # catch for URL not found
 def page_not_found(e):
@@ -28,20 +27,22 @@ def page_not_found(e):
 
 @app.route('/')  # connects default URL to index() function
 def index():
+    # creates an event stream for server to continuously update
     if request.headers.get('accept') == 'text/event-stream':
         def events():            
-                
+            
             for i, c in enumerate(itertools.cycle('abc')):
+                # words.txt contains a big list of dictionary words
                 ranWord = open('words.txt').read().splitlines()
                 
-                if time.strftime("%H:%M:%S") == "00:00:00":
+                if time.strftime("%H:%M:%S") == "00:00:00": # if time is midnight, pick a random word from words.txt
                     wordOfTheDay = random.choice(ranWord)
                     print(wordOfTheDay)
                     
                     with open('actualWordOfTheDay.txt', 'w') as f:
                         pass
                     with open('actualWordOfTheDay.txt', 'a') as f:
-                        f.write(wordOfTheDay)
+                        f.write(wordOfTheDay) # output random word to actualWordOfTheDay.txt
 
              
     
@@ -51,10 +52,13 @@ def index():
                 
                     
         return Response(events(), content_type='text/event-stream')
+    
+    # take the word from actualWordOfTheDay.txt and input it in the dictionary API
     wordOfTheDayFile = open('actualWordOfTheDay.txt')
     wordOfTheDayPInFile = wordOfTheDayFile.readlines()
     wordOfTheDayPrinted = wordOfTheDayPInFile[0]
     
+    # API
     url = "https://dictionary-by-api-ninjas.p.rapidapi.com/v1/dictionary"
 
     querystring = {"word":wordOfTheDayPrinted}
@@ -69,14 +73,17 @@ def index():
     wordDefinition = response.json().get('definition')
     word = response.json().get('word')
 
+    # DEBUGGING, OUTPUT SHOWN IN TERMINAL
     print("Word: ")
     print(word)
     print()
     print("Definition: ")
     print(wordDefinition)
     
+    # convert to json so I can manipulate it as a string
     newDef = json.dumps(wordDefinition)
     
+    # pretty formatting
     for ele in newDef:
         if ele.isdigit():
             newDef = newDef.replace(ele, '\n')
@@ -107,6 +114,7 @@ def dictionaryInput():
 def apitest(): 
     import requests
     
+    # dictionary API 
     inputWord = request.form.get("inputWord")
 
     url = "https://dictionary-by-api-ninjas.p.rapidapi.com/v1/dictionary"
@@ -131,6 +139,7 @@ def apitest():
     
     newDef = json.dumps(wordDefinition)
     
+    # Pretty formatting
     for ele in newDef:
         """
         if ele.isdigit():
@@ -154,26 +163,6 @@ def apitest():
 
 
     newDef = newDef.split('\n')
-
-    """
-    for word in newDef:
-        a = newDef.split('a')
-    print(a)
-    #newDef = newDef.split()
-    for i in range(10):
-        print(" ")
-    print("new")
-    print(newDef)
-    
-    
-    for word in newDef:
-        print(word)
-    
-        
-    print(newDef)
-    
-    newDef = " ".join(newDef)
-    """ 
     
     return render_template("api.html", word=word, wordDefinition=wordDefinition, newDef=newDef)
 
