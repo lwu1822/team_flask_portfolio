@@ -12,7 +12,7 @@ import time
 import itertools
 from datetime import datetime
 
-
+import re
 
 import requests
 
@@ -132,13 +132,40 @@ def apitest():
     newDef = json.dumps(wordDefinition)
     
     for ele in newDef:
+        """
         if ele.isdigit():
             newDef = newDef.replace(ele, '\n')
-    print(newDef)
+        """ 
+        if re.match("[1-9]", ele): 
+            newDef = newDef.replace(ele, '\n')
+        if re.match("\\\\", ele): 
+            newDef = newDef.replace(ele, '')
+        if re.match("0", ele):
+            newDef = newDef.replace(ele, '')
+    
+    
 
     newDef = newDef.split('\n')
 
-   
+    """
+    for word in newDef:
+        a = newDef.split('a')
+    print(a)
+    #newDef = newDef.split()
+    for i in range(10):
+        print(" ")
+    print("new")
+    print(newDef)
+    
+    
+    for word in newDef:
+        print(word)
+    
+        
+    print(newDef)
+    
+    newDef = " ".join(newDef)
+    """ 
     
     return render_template("api.html", word=word, wordDefinition=wordDefinition, newDef=newDef)
 
