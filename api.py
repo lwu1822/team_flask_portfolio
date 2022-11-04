@@ -17,35 +17,35 @@ class JokesAPI:
         def post(self, feedback):
             pass
             
-    # getJokes()
+    # getFeedbacks()
     class _Read(Resource):
         def get(self):
             return jsonify(getFeedbacks())
 
-    # getJoke(id)
+    # getFeedback(id)
     class _ReadID(Resource):
         def get(self, id):
             return jsonify(getFeedback(id))
 
-    # getRandomJoke()
+    # getRandomFeedback()
     class _ReadRandom(Resource):
         def get(self):
             return jsonify(getRandomFeedback())
     
-    # getRandomJoke()
+    # getRandomFeedback()
     class _ReadCount(Resource):
         def get(self):
             count = countFeedback()
             countMsg = {'count': count}
             return jsonify(countMsg)
 
-    # put method: addJokeHaHa
+    # put method: addFeedbackHaHa
     class _UpdateYes(Resource):
         def put(self, id):
             addFeedbackHaHa(id)
             return jsonify(getFeedback(id))
 
-    # put method: addJokeBooHoo
+    # put method: addFeedbackBooHoo
     class _UpdateNo(Resource):
         def put(self, id):
             addFeedbackBooHoo(id)
@@ -66,26 +66,26 @@ if __name__ == "__main__":
     url = server + "/api/feedback"
     responses = []  # responses list
 
-    # get count of jokes on server
+    # get count of feedback on server
     count_response = requests.get(url+"/count")
     count_json = count_response.json()
     count = count_json['count']
 
-    # update likes/dislikes test sequence
+    # update yes/no test sequence
     num = str(random.randint(0, count-1)) # test a random record
     responses.append(
-        requests.get(url+"/"+num)  # read joke by id
+        requests.get(url+"/"+num)  # read feedback by id
         ) 
     responses.append(
-        requests.put(url+"/yes/"+num) # add to like count
+        requests.put(url+"/yes/"+num) # add to yes count
         ) 
     responses.append(
-        requests.put(url+"/no/"+num) # add to jeer count
+        requests.put(url+"/no/"+num) # add to no count
         ) 
 
     # obtain a random joke
     responses.append(
-        requests.get(url+"/random")  # read a random joke
+        requests.get(url+"/random")  # read a random feedback
         ) 
 
     # cycle through responses
